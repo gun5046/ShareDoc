@@ -20,6 +20,7 @@ import java.util.Queue;
 public class MainController{
 
 	private final SimpMessagingTemplate spmt;
+
 	Queue<Command> q = new LinkedList<>();
 	@GetMapping("/")
 	public String main() {
@@ -28,18 +29,23 @@ public class MainController{
 	
 	@MessageMapping("/chat.send")
 	public void sendCommand(CommandDto commanddto) {
+		int ttl = 0 ;
 		System.out.println(commanddto.getCommand());
+
 		Command command = new Command(commanddto);
+
 		q.add(command);
 		while(q.peek().getUser()!=command.getUser()){
 			try {
 				Thread.sleep(10);
+				System.out.println(ttl++);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(command.getValue());
+
 		spmt.convertAndSend("/topic/doc", q.poll());
+
 	}
 	
 }
