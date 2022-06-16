@@ -103,8 +103,8 @@ window.onload = function() {
 		} else {
 			let length = waiting_queue._arr.length;
 			for (i = 0; i < length; i++) {
-				if (waiting_queue._arr[0].index <= data.index) {
-					if (waiting_queue._arr[0].command === 'INSERT') {
+				if (waiting_queue._arr[i].index <= data.index) {
+					if (waiting_queue._arr[i].command === 'INSERT') {
 						data.index++;
 					} else {
 						data.index--;
