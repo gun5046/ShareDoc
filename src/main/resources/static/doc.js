@@ -98,7 +98,6 @@ window.onload = function() {
 	function responseMessage(response) {
 		let data = JSON.parse(response.body);
 
-		waiting_time = true;
 		if (data.user === user.value) {
 			console.log("내꺼");
 			waiting_queue.dequeue();
