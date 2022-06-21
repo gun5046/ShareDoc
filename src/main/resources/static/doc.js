@@ -50,10 +50,12 @@ window.onload = function() {
 		command.value = k;
 		command.index = i;
 		command.user = user.value;
-		while(waiting_time===true) setTimeout(console.log("wating_queue"),100);
 		waiting_queue.enqueue(command);
-
-		let cmdObject= JSON.stringify(command);
+		while(waiting_time===true) setTimeout(console.log("wating_queue"),100);
+		
+		waiting_time=true;
+		let sendcommand = waiting_queue._arr[0].command;
+		let cmdObject= JSON.stringify(sendcommand);
 
 		stompClient.send("/app/chat.send", {"Type" : "Send"}, cmdObject);
 		console.log("보냄");
