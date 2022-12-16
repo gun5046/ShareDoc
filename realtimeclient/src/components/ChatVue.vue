@@ -24,12 +24,14 @@ export default {
     methods: {
         sendMsg(event) {
             if (this.ignoreKey.includes(event.key)) return;
-            console.log(event.key)
+
         }
     },
     created() {
         this.sender = localStorage.getItem("sender")
         this.roomName = localStorage.getItem("roomName")
+
+        this.$store.dispatch("socketConnect")
     },
 }
 </script>

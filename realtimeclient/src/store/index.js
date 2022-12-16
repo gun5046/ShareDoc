@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "@/api/axios.js";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -19,8 +20,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    socketConnect() {
-      this.socket = new WebSocket("wss://localhost:9999/");
+    socketConnect({ commit }) {
+      try {
+        console.log(1);
+      } catch (err) {
+        commit("ERROR_OCCURENCE", err);
+      }
     },
 
     async getRoomList({ commit }) {
