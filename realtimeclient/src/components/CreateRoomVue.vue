@@ -16,12 +16,14 @@ export default {
     },
 
     methods: {
-        createRoom() {
+        async createRoom() {
             if (this.roomName === "") {
                 alert("입력하시오")
                 return
             }
-            this.$store.dispatch("createRoom", this.roomName)
+
+            await this.$store.dispatch("createRoom", this.roomName)
+            this.$router.push({ name: "room-list" })
         }
     }
 }

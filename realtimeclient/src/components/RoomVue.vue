@@ -22,6 +22,7 @@ export default {
     methods: {
         enterRoom(name) {
             this.$store.dispatch("enterRoom", name)
+            this.$router.push({ name: "room-chat" })
         }
     }
 }

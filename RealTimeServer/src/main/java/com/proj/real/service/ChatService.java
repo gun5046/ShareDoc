@@ -19,6 +19,7 @@ public class ChatService {
 	}
 	
 	public void makeRoom(Room room) {
+
 		roomList.add(new Room(room.getRoomName()));
 	}
 	

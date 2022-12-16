@@ -32,6 +32,7 @@ public class MainController {
 	@GetMapping("/rooms")
 	public ResponseEntity<?> getRooms(){
 		List<Room> list = chatService.getRooms();
+
 		return new ResponseEntity<List<Room>>(list, HttpStatus.OK);
 	}
 	

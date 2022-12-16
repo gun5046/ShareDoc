@@ -13,36 +13,42 @@ export default new Vuex.Store({
     SET_ROOM_LIST: (state, data) => {
       state.rooms = data.data;
     },
+
+    ERROR_OCCURENCE: (state, err) => {
+      console.log(err);
+    },
   },
   actions: {
     socketConnect() {
       this.socket = new WebSocket("wss://localhost:9999/");
     },
 
-    getRoomList({ commit }) {
-      axios
+    async getRoomList({ commit }) {
+      await axios
         .get("rooms")
         .then((res) => {
           commit("SET_ROOM_LIST", res);
-          console.log(res);
-          //왜안도미>?
         })
         .catch((err) => {
-          console.log(err);
+          commit("ERROR_OCCURENCE", err);
         });
     },
 
-    createRoom({ commit }, roomName) {
-      console.log(commit);
-      console.log(roomName);
-      //const room = {};
+    async createRoom({ commit }, roomName) {
+      await axios.post("room", `${roomName}`).catch((err) => {
+        commit("ERROR_OCCURENCE", err);
+      });
     },
-    enterRoom(roomName) {
-      const sender = prompt("사용자명을 입력하세요");
-      if (sender !== "") {
-        localStorage.setItem("sender", sender);
-        localStorage.setItem("roomName", roomName);
-        this.$router.push({ name: "room-chat" });
+
+    enterRoom({ commit }, roomName) {
+      try {
+        const sender = prompt("사용자명을 입력하세요");
+        if (sender !== "") {
+          localStorage.setItem("sender", sender);
+          localStorage.setItem("roomName", roomName);
+        }
+      } catch (err) {
+        commit("ERROR_OCCURENCE", err);
       }
     },
   },
