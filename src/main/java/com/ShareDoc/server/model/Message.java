@@ -1,16 +1,16 @@
-package com.ShareDoc.server.dto;
+package com.ShareDoc.server.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommandDto {
-    private String user;
-    private String command;
+@Data
+public class Message {
+    private String id;
+    private String element;
     private String type;
-    private String value;
     private int index;
+    private int timestamp;
 }
